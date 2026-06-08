@@ -1,9 +1,10 @@
 package com.Gautam.journalApp.controller;
 
 
-import com.Gautam.journalApp.entry.User;
+import com.Gautam.journalApp.entity.User;
 import com.Gautam.journalApp.service.UserService;
-import org.bson.types.ObjectId;
+import com.Gautam.journalApp.service.CatService;
+import com.Gautam.journalApp.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,14 +12,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private WeatherService weatherService;
+
 
 
     @PutMapping
@@ -42,4 +45,12 @@ public class UserController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @GetMapping
+    public ResponseEntity<?> greeting(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return new ResponseEntity<>("Temp is feeling like " + weatherService.getWeather("Ahmedabad").getMain().getTemp(),HttpStatus.OK);
+    }
+
+
+
 }

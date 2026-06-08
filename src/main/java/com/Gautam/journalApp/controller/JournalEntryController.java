@@ -1,7 +1,7 @@
 package com.Gautam.journalApp.controller;
 
-import com.Gautam.journalApp.entry.JournalEntry;
-import com.Gautam.journalApp.entry.User;
+import com.Gautam.journalApp.entity.JournalEntry;
+import com.Gautam.journalApp.entity.User;
 import com.Gautam.journalApp.service.JournalEntryService;
 import com.Gautam.journalApp.service.UserService;
 import org.bson.types.ObjectId;
@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 

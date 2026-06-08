@@ -1,6 +1,6 @@
 package com.Gautam.journalApp.repository;
 
-import com.Gautam.journalApp.entry.User;
+import com.Gautam.journalApp.entity.User;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

@@ -1,6 +1,7 @@
 package com.Gautam.journalApp.controller;
 
-import com.Gautam.journalApp.entry.User;
+import com.Gautam.journalApp.cache.AppCache;
+import com.Gautam.journalApp.entity.User;
 import com.Gautam.journalApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AppCache appCache;
+
     @GetMapping("/all-users")
     public ResponseEntity<?> getAllUsers(){
         List<User> users = userService.getAllUser();
@@ -30,5 +34,9 @@ public class AdminController {
     public void createAdminUser(@RequestBody User user){
             userService.saveAdmin(user);
 
+    }
+    @GetMapping("clear-app-cache")
+    public void clearAppCache(){
+        appCache.init();
     }
 }

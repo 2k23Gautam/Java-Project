@@ -1,7 +1,7 @@
 package com.Gautam.journalApp.repository;
 
 
-import com.Gautam.journalApp.entry.JournalEntry;
+import com.Gautam.journalApp.entity.JournalEntry;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

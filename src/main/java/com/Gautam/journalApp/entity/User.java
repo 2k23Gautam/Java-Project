@@ -1,6 +1,5 @@
-package com.Gautam.journalApp.entry;
+package com.Gautam.journalApp.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -28,6 +27,9 @@ public class User {
     private String userName;
     @NonNull
     private String password;
+
+    private String email;
+    private boolean sentimentalAnalysis;
 
     @DBRef
     private List<JournalEntry> journalEntries = new ArrayList<>();
