@@ -4,4 +4,3 @@ target
 *.md
 *.env
 application-dev.yml
-application-prod.yml
