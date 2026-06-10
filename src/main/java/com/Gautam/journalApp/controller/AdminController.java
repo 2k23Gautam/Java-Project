@@ -3,6 +3,7 @@ package com.Gautam.journalApp.controller;
 import com.Gautam.journalApp.cache.AppCache;
 import com.Gautam.journalApp.entity.User;
 import com.Gautam.journalApp.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
+//@SecurityRequirement(name="bearerAuth")
 public class AdminController {
 
     @Autowired

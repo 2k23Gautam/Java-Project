@@ -5,6 +5,7 @@ import com.Gautam.journalApp.repository.UserRepository;
 import com.Gautam.journalApp.service.UserDetailsServiceImpl;
 import com.Gautam.journalApp.service.UserService;
 import com.Gautam.journalApp.utilies.JwtUtil;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

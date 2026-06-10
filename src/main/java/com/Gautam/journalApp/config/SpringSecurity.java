@@ -1,6 +1,7 @@
 package com.Gautam.journalApp.config;
 import com.Gautam.journalApp.filter.JwtFilter;
 import com.Gautam.journalApp.service.UserDetailsServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@Slf4j
 public class SpringSecurity {
 
     @Autowired
@@ -28,22 +30,30 @@ public class SpringSecurity {
     @Autowired
     private JwtFilter jwtFilter;
 
-//    private static final String[] SWAGGER_WHITELIST = {
-//            "/v3/api-docs/**",
-//            "/swagger-ui/**",
-//            "/swagger-ui.html"
-//    };
+    @Autowired
+    private OAuth2SuccessHandler oAuth2SuccessHandler;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http.authorizeHttpRequests(request -> request
                         .requestMatchers("/public/**").permitAll()
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/v3/api-docs.yaml"
+                        ).permitAll()
                         .requestMatchers("/journal/**","/user/**").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .oauth2Login(oAuth-> oAuth
+                        .failureHandler(((request, response, exception) -> {
+                    log.error("Exception occurred while create AuthenticationToken ",exception);
+                })).successHandler(oAuth2SuccessHandler))
                 .build();
     }
 

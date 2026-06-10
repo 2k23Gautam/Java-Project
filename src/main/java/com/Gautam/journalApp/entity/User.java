@@ -1,5 +1,7 @@
 package com.Gautam.journalApp.entity;
 
+import com.Gautam.journalApp.enums.AuthProviderType;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -15,6 +17,7 @@ import java.util.List;
 @Document(collection = "users")
 @Getter
 @Setter
+@Builder
 public class User {
 
     @Id
@@ -25,11 +28,15 @@ public class User {
     @Indexed(unique = true)
     @NonNull
     private String userName;
-    @NonNull
     private String password;
 
     private String email;
     private boolean sentimentalAnalysis;
+
+    private String providerId;
+
+
+    private AuthProviderType authProviderType;
 
     @DBRef
     private List<JournalEntry> journalEntries = new ArrayList<>();

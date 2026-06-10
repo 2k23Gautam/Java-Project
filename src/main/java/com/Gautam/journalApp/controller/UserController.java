@@ -5,6 +5,10 @@ import com.Gautam.journalApp.entity.User;
 import com.Gautam.journalApp.service.UserService;
 import com.Gautam.journalApp.service.CatService;
 import com.Gautam.journalApp.service.WeatherService;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name="User")
+
 public class UserController {
 
     @Autowired
@@ -23,7 +29,7 @@ public class UserController {
     private WeatherService weatherService;
 
 
-
+    @Hidden
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User newuser){
         Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
@@ -45,6 +51,16 @@ public class UserController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @Operation(
+            description = "Get Endpoint For temp",
+            summary = "This is summary for temp",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    )
+            }
+    )
     @GetMapping
     public ResponseEntity<?> greeting(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

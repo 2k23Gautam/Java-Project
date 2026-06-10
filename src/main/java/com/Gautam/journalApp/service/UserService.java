@@ -65,4 +65,23 @@ public class UserService {
     public User findByUserName(String username){
         return userRepository.findByUserName(username);
     }
+
+    public User saveNewUserWithoutPassword(String userName, String email, String providerId, com.Gautam.journalApp.enums.AuthProviderType providerType){
+        try{
+            User user = User.builder()
+                    .userName(userName)
+                    .email(email)
+                    .providerId(providerId)
+                    .authProviderType(providerType)
+                    .roles(Arrays.asList("USER"))
+                    .build();
+
+            userRepository.save(user);
+            return user;
+        }catch (Exception e)
+        {
+            log.error("error occurred for {}",userName,e);
+            return null;
+        }
+    }
 }
